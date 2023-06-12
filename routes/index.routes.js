@@ -20,7 +20,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/artist-search", (req, res, next) => {
   spotifyApi
-    .searchArtists(`${req.body.artist}`, { limit: 15 })
+    .searchArtists(`${req.query.artist}`, { limit: 15 })
     .then((data) => {
       console.log("The received data from the API: ", data.body);
       res.json(data);
@@ -31,8 +31,9 @@ router.get("/artist-search", (req, res, next) => {
 });
 
 router.get("/album/:artistId", (req, res, next) => {
+  console.log(req.params.artistId);
   spotifyApi
-    .getArtistAlbums(`${req.params}`, { limit: 15 })
+    .getArtistAlbums(`${req.params.artistId}`, { limit: 15 })
     .then((data) => {
       console.log("The received data from the API: ", data.body);
       res.json(data);
@@ -43,8 +44,9 @@ router.get("/album/:artistId", (req, res, next) => {
 });
 
 router.get("/tracks/:albumId", (req, res, next) => {
+  console.log(req.params.albumId);
   spotifyApi
-    .getArtistAlbums(`${req.params}`, { limit: 15 })
+    .getAlbumTracks(`${req.params.albumId}`, { limit: 15 })
     .then((data) => {
       console.log("The received data from the API: ", data.body);
       res.json(data);

@@ -10,20 +10,6 @@ require("./db");
 const express = require("express");
 const app = express();
 
-const SpotifyWebApi = require("spotify-web-api-node");
-
-const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-});
-
-spotifyApi
-  .clientCredentialsGrant()
-  .then((data) => spotifyApi.setAccessToken(data.body["access_token"]))
-  .catch((error) =>
-    console.log("Something went wrong when retrieving an access token", error)
-  );
-
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
